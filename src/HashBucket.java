@@ -18,7 +18,7 @@ public class HashBucket {
 
     Object put(Object key, Object value){
 
-        int hc= key.hashCode();
+        int hc= Math.abs(key.hashCode());
         int index = hc % capacity;
         //System.out.println("entering");
         if(hashtable[index] == null){
@@ -48,7 +48,7 @@ public class HashBucket {
 
     Object get(Object key){
 
-        int hc = key.hashCode();
+        int hc = Math.abs(key.hashCode());
         int index = hc % capacity;
 
         if(hashtable[index] == null){
