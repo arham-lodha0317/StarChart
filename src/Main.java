@@ -1,12 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<double[]> stars = new ArrayList<double[]>();
+    private static ArrayList<double[]> stars = new ArrayList<>();
     private static HashBucket position;
     private static HashBucket magnitude;
     private static HashBucket names;
@@ -34,7 +33,6 @@ public class Main {
         magnitude = new HashBucket(3527 * 2);
         names = new HashBucket(4000 * 2);
 
-        int starNum = 1;
         while(file.hasNext()){
             Scanner starLine = new Scanner(file.nextLine());
             double x = starLine.nextDouble();
@@ -48,12 +46,12 @@ public class Main {
             double magnitudeN = starLine.nextDouble();
             int harvard = starLine.nextInt();
 
-            String name = "";
+            StringBuilder name = new StringBuilder();
             while(starLine.hasNext()){
-                name += starLine.nextLine().trim();
+                name.append(starLine.nextLine().trim());
             }
 
-            String[] namesA = name.split("; ");
+            String[] namesA = name.toString().split("; ");
 
             position.put(draper, coords);
             magnitude.put(draper, magnitudeN);
@@ -63,7 +61,6 @@ public class Main {
                     names.put(n, draper);
                 }
             }
-            starNum++;
 
             plotByMag(draper);
         }
@@ -74,7 +71,7 @@ public class Main {
     public static void plotSimple(int id){
 
         double[] d = (double[]) position.get(id);
-        StdDraw.filledCircle(d[0], d[1], 10/SCALE);
+        StdDraw.filledCircle(d[0], d[1], ((double)10)/SCALE);
 
     }
 
